@@ -2,7 +2,7 @@ import os
 import subprocess
 import tempfile
 from google.adk.agents import LlmAgent
-from google.adk.tools.mcp_tool import McpToolset, StdioConnectionParams
+from google.adk.tools.mcp_tool import McpToolset, StreamableHTTPConnectionParams, StdioConnectionParams
 from google.adk.tools.bigquery import BigQueryCredentialsConfig, BigQueryToolset
 from google.adk.tools.mcp_tool.mcp_session_manager import StdioConnectionParams
 from mcp import StdioServerParameters
@@ -44,9 +44,16 @@ def launch_beam_job(pipeline_code: str, job_name: str) -> str:
             os.remove(temp_path)
 
 # --- 2. gcs tools to run gcloud commands ---
+# gcs_toolset = McpToolset(
+#     connection_params=StdioConnectionParams(
+#         server_params=StdioServerParameters(command="npx", args=["-y", "@google-cloud/gcloud-mcp"]),
+#         timeout=200.0
+#     )
+# )
+
 gcs_toolset = McpToolset(
-    connection_params=StdioConnectionParams(
-        server_params=StdioServerParameters(command="npx", args=["-y", "@google-cloud/gcloud-mcp"]),
+    connection_params=StreamableHTTPConnectionParams(
+        url="https://gcs-mcp-server-412774232669.asia-south1.run.app/mcp",
         timeout=200.0
     )
 )
