@@ -112,3 +112,14 @@ root_agent = LlmAgent(
     instruction=ELABORATED_INSTRUCTION,
     tools=[launch_beam_job, bigquery_toolset, gcs_toolset ]
 )
+
+
+# below code to publish A2A agent 
+def get_dataflow_agent():
+ return root_agent
+
+from google.adk.a2a.utils.agent_to_a2a import to_a2a
+# Existing agent code here...
+
+# Wrap the agent to make it A2A-compliant
+a2a_app = to_a2a(root_agent)
