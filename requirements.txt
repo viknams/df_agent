@@ -6,4 +6,3 @@ apache-beam[gcp]
 pandas
 google-cloud-storage
 db-dtypes
-apache-beam[gcp]

@@ -14,6 +14,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
+
+RUN apt-get update && apt-get install -y nodejs npm
+
 # Copy requirements and install
 # Ensure "google-adk[a2a]", "python-dotenv", and "uvicorn" are listed
 COPY requirements.txt .
